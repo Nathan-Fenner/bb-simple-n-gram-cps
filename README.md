@@ -42,14 +42,14 @@ shift the head left:
 
 ```
       C
-....1101011....
+....1100011....
 ```
 
 and change the state to `B`
 
 ```
       B
-....1101011....
+....1100011....
 ```
 
 However, we no longer have a local context.
