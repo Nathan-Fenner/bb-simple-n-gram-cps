@@ -235,13 +235,13 @@ impl PartialReachable {
 
                 let discovered_ngram = discovered_context.get(dir, self.radius);
 
-                if self.reachable_ngrams[dir].contains(&discovered_ngram)
-                    && !self.reachable_local_contexts.contains(&discovered_context)
-                {
+                if self.reachable_ngrams[dir].contains(&discovered_ngram) {
                     // When the left half is known but the context as a whole is not, mark it as known
                     // and start over.
-                    self.reachable_local_contexts.insert(discovered_context);
-                    work_queue_local.push(discovered_context);
+                    if !self.reachable_local_contexts.contains(&discovered_context) {
+                        self.reachable_local_contexts.insert(discovered_context);
+                        work_queue_local.push(discovered_context);
+                    }
                 } else {
                     // Otherwise, remember that we are waiting on this gram, so that if it appears,
                     // we can revisit things.
